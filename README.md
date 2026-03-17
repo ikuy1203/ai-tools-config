@@ -1,24 +1,32 @@
 # AI Custom Commands & Agents Repository
 
-This repository centrally manages custom commands, agents, and skills for various AI tools including Gemini CLI, ClaudeCode, and OpenAI Codex.
+AIツール（Gemini CLI、Claude Code、OpenAI Codexなど）用のカスタムコマンド、エージェント、スキルを管理するためのリポジトリです。
 
-## Directory Structure
+## 📁 Directory Structure
 
-- `gemini/`: Contains custom commands and configurations for Gemini CLI.
-- `claude-code/`: Stores ClaudeCode agent definitions and prompts.
-- `codex/`: Holds prompts, rules, and scripts for OpenAI Codex.
+詳細な構成は以下の通りです：
 
-## Installation / Setup
+- `gemini/commands/`: Gemini CLI用のカスタムコマンド（`.toml`形式）を格納します。
+- `claude-code/agents/`: Claude Code用のエージェント定義やプロンプトを保存します。
+- `codex/`: OpenAI Codex用のプロンプト（`prompts/`）やスクリプト（`scripts/`）を保持します。
 
-You can use the provided `setup.sh` script to automatically symlink your global configurations (like Gemini commands).
+## 🚀 Installation & Setup
+付属の `setup.sh` スクリプトを使用することで、グローバル設定を自動的にセットアップします。
 
 ```bash
 ./setup.sh
 ```
 
-### ClaudeCode Agents
-ClaudeCode agents are typically used on a per-project basis. To use an agent in your project, create a symlink from this repository to your project's `.claude/agents/` directory:
+このスクリプトは `gemini/commands/*.toml` を `~/.gemini/commands/` にシンボリックリンクします。
+
+### 🤖 Claude Code Agents
+
+Claude Code のエージェントは通常プロジェクトごとに使用します。プロジェクトでエージェントを使用するには、このリポジトリから対象プロジェクトの `.claude/agents/` ディレクトリへシンボリックリンクを作成してください：
 
 ```bash
 ln -sf /path/to/this/repo/claude-code/agents/my-agent.md /path/to/target-project/.claude/agents/
 ```
+
+### 🧠 Codex
+
+Codex用のファイルは必要に応じて各プロジェクトから直接参照して使用してください。
