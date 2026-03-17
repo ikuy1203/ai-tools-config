@@ -16,7 +16,7 @@ link_commands() {
     local target_dir="$2"
     local extension="$3"
 
-    if [ ! -d "$src_dir" ]; then
+    if [[ ! -d "$src_dir" ]]; then
         log_warn "Directory not found: $src_dir"
         return 0
     fi
@@ -33,8 +33,15 @@ link_commands() {
         else
             for f in "${files[@]}"; do
                 local filename="${f##*/}"
-                ln -sf "$f" "$target_dir/$filename"
-                log_success "Symlinked: $filename -> $target_dir/$filename"
+                local target="$target_dir/$filename"
+
+                if [[ -L "$target" && "$(readlink -- "$target")" == "$f" ]]; then
+                    log_success "Already linked: $filename"
+                    continue
+                fi
+
+                ln -snf -- "$f" "$target"
+                log_success "Symlinked: $filename -> $target"
             done
         fi
     )
