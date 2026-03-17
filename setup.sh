@@ -35,12 +35,12 @@ link_commands() {
                 local filename="${f##*/}"
                 local target="$target_dir/$filename"
 
-                if [[ -L "$target" && "$(readlink "$target")" == "$f" ]]; then
+                if [[ -L "$target" && "$(readlink -- "$target")" == "$f" ]]; then
                     log_success "Already linked: $filename"
                     continue
                 fi
 
-                ln -snf "$f" "$target"
+                ln -snf -- "$f" "$target"
                 log_success "Symlinked: $filename -> $target"
             done
         fi
